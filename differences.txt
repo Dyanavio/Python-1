@@ -1,0 +1,3 @@
+Differences:
+  > (more specifically thermodynamics),
+  > The theory of the heat equation was first developed by Joseph Fourier in 1822 

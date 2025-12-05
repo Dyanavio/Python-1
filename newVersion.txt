@@ -1,0 +1,7 @@
+In mathematics and physics 
+(more specifically thermodynamics),
+the heat equation is a parabolic partial differential equation. 
+The theory of the heat equation was first developed by Joseph Fourier in 1822 
+for the purpose of modeling how a quantity such as heat diffuses through a
+given region. Since then, the heat equation and its variants have been found to be
+fundamental in many parts of both pure and applied mathematics.
