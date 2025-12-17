@@ -22,3 +22,11 @@ Classes/Django/Py-3/urls.py
 Classes/Django/Py-3/views.py
 Classes/Django/Py-4/urls.py
 Classes/Django/Py-4/views.py
+Classes/Django/Py-5/urls.py
+Classes/Django/Py-5/views.py
+Classes/Django/Py-5/templates/course.html
+Classes/Django/Py-5/templates/index.html
+Classes/Django/Py-5/templates/index1.html
+Classes/Django/Py-5/templates/index2.html
+Classes/Django/Py-5/templates/index3.html
+Classes/Django/Py-5/templates/studentTable.html
