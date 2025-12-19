@@ -30,3 +30,11 @@ Classes/Django/Py-5/templates/index1.html
 Classes/Django/Py-5/templates/index2.html
 Classes/Django/Py-5/templates/index3.html
 Classes/Django/Py-5/templates/studentTable.html
+Classes/Django/Py-6/urls.py
+Classes/Django/Py-6/views.py
+Classes/Django/Py-6/templatese/banner.html
+Classes/Django/Py-6/templatese/base.html
+Classes/Django/Py-6/templatese/baseEnglish.html
+Classes/Django/Py-6/templatese/contacts.html
+Classes/Django/Py-6/templatese/map.html
+Classes/Django/Py-6/templatese/translation.html
