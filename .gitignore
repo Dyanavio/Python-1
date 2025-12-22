@@ -38,3 +38,15 @@ Classes/Django/Py-6/templatese/baseEnglish.html
 Classes/Django/Py-6/templatese/contacts.html
 Classes/Django/Py-6/templatese/map.html
 Classes/Django/Py-6/templatese/translation.html
+Classes/Django/Py-7/urls.py
+Classes/Django/Py-7/views.py
+Classes/Django/Py-7/templates/contactCBV.html
+Classes/Django/Py-7/templates/contacts.html
+Classes/Django/Py-7/templates/numbers.html
+Classes/Django/Py-7/templates/water.html
+HW/Hw-13/images/books/fieldTheory.png
+HW/Hw-13/images/books/mechanics.png
+HW/Hw-13/images/books/nocover.png
+HW/Hw-13/images/books/quantumMechanics.png
+HW/Hw-13/images/readers/akane.png
+HW/Hw-13/images/readers/nouser.png

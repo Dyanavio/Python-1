@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Task - I</title>
+</head>
+<body>
+    <div class="container-fluid">
+        {% if not sent %}
+            <h1>Entrance to website</h1>
+            <form action="/entrance/" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col ">
+                        <label for="userlogin">Login: </label>
+                        <input name="userlogin" id="userlogin" type="text"  required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="password">Password: </label>
+                        <input name="password" id="password" type="password"  required/>
+                    </div>
+                </div>
+                
+                <input class="btn btn-info" type="submit" value="Submit"/>
+            </form>
+        {% else %}
+            {% if role == 'admin' %}
+                <div class="d-flex justify-content-center alert alert-info mt-3" role="alert">
+                    <h1 class="text text-light fw-bold">Welcome, administrator {{ userlogin }}</h1>
+                </div>
+            {% elif role == 'selfRegistered' %}
+                <div class="d-flex justify-content-center alert alert-warning mt-3" role="alert">
+                    <h1 class="text text-dark fw-bold">Welcome, user {{ userlogin }}</h1>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-center alert alert-dark mt-3" role="alert">
+                    <h1 class="text text-light fw-bold">Who are you again?</h1>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
