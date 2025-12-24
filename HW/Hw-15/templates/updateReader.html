@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <h1 class="display-4 text-dark">Edit Reader</h1>
+        <p class="lead text-muted">Update Reader</p>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Error Occured</h4>
+    <p>{{ error }}</p>
+    <a href="{% url 'index' %}" class="btn btn-danger btn-sm">Back to Library</a>
+</div>
+{% endif %}
+
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Success</h4>
+    <p>{{ message }}</p>
+    <a href="{% url 'reader' readerId %}" class="btn btn-success btn-sm">View Reader Details</a>
+</div>
+{% endif %}
+
+{% if reader and not success %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card bg-light border-success">
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label text-success">Reader's Name</label>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <div class="alert alert-danger small mt-1">
+                            {{ form.name.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_name" class="form-label text-success">Reader's Surname</label>
+                        {{ form.surname }}
+                        {% if form.surname.errors %}
+                        <div class="alert alert-danger small mt-1">
+                            {{ form.surname.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_contacts" class="form-label text-success">Contacts</label>
+                        {{ form.contacts }}
+                        {% if form.contacts.errors %}
+                        <div class="alert alert-danger small mt-1">
+                            {{ form.contacts.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label text-success">Email</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div class="alert alert-danger small mt-1">
+                            {{ form.email.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_registration_date" class="form-label text-success">Registration date</label>
+                        {{ form.registrationDate }}
+                        {% if form.registrationDate.errors %}
+                        <div class="alert alert-danger small mt-1">
+                            {{ form.registrationDate.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_books_taken" class="form-label text-success">Books taken</label>
+                        {{ form.booksTaken }}
+                        {% if form.booksTaken.errors %}
+                        <div class="alert alert-danger small mt-1">
+                            {{ form.booksTaken.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    
+                    <div class="mb-3">
+                        <label for="id_style" class="form-label text-success">Avatar</label>
+                        {% if reader.avatar %}
+                        <div class="mb-2">
+                            <p class="text-muted small">Current avatar:</p>
+                            <img src="{% url 'index' %}media/pictures/readers/{{ reader.avatar }}" alt="{{ reader.name }}"
+                                style="max-width: 200px; height: auto; border: 1px solid #01490c;">
+                        </div>
+                        {% endif %}
+                        {{ form.avatar }}
+                        <small class="text-muted d-block mt-1">Upload new avatar (optional)</small>
+                        {% if form.avatar.errors %}
+                            <div class="alert alert-danger small mt-1">
+                                {{ form.avatar.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success">
+                            Save Changes
+                        </button>
+                        <a href="{% url 'reader' reader.id %}" class="btn btn-dark mx-2">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}
