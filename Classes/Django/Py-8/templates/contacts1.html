@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Froms II</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        {% if not sent %}
+            <h1>Form (Django)</h1>
+            <form action="/contacts1/" method="post">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Send">
+            </form>
+        {% else %}
+        <div class="card bg-light w-25 mt-3">
+            <div class="card-header">
+                <span class="fw-bold text-dark">{{ request.POST.name }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <span class="text-dark">{{ request.POST.age }}</span>
+                </div>
+                <div class="row">
+                    <span class="text-dark">{{ request.POST.email }}</span>
+                </div>
+                
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+</body>
+</html>

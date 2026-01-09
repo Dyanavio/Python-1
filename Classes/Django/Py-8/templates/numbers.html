@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        {% if not sent %}
+            <form action="/numbers/" method="post">
+                {% csrf_token %}
+                <h1>Prime numbers in range</h1>
+                <label for="begin">Start from: </label>
+                <input name="begin" type="number" min="0" id="begin"/><br/><br/>
+
+                <label for="end">End with: </label>
+                <input name="end" type="number" min="1" id="end"/><br/>
+
+                <input class="btn btn-secondary" type="submit" value="Send"/>
+            </form>
+        {% else %}
+            <div class="card bg-light w-25 mt-3">
+                <div class="card-header">
+                    <span class="fw-bold text-dark">Primes in range: [{{ request.POST.begin }}, {{ request.POST.end }}]</span>
+                </div>
+                <div class="card-body">
+                    {% for prime in primes %}
+                        <span>{{ prime }} </span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

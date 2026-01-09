@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        {% if not sent %}
+            <h1>Book Review Form</h1>
+            <form action="/review/" method="post">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                    <input class="btn btn-dark" type="submit" value="Send">
+            </form>
+        {% else %}
+        <div class="card bg-light w-25 mt-3">
+            <div class="card-header">
+                <span class="fw-bold text-dark">{{ request.POST.username }}'s Review</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <span class="text-dark">{{ request.POST.rating }}</span>
+                </div>
+                <div class="row">
+                    {% if request.POST.spoilerFree == 'on' %}
+                        <span class="text-success">Spoiler free</span>
+                    {% else %}
+                        <span class="text-danger">Spoiler alert!</span>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <span class="text-dark">
+                        {{ request.POST.review }}
+                    </span>
+                </div>
+                
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+</body>
+</html>

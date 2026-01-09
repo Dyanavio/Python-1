@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Films</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    <h1>Add Film</h1>
+    {% if not sent %}
+    <form action="/addFilm/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-dark" type="submit" value="Submit">
+    </form>
+    {% else %}
+        <h2>Data:</h2>
+        <p>Director: {{ request.POST.title }}</p>
+        <p>Title: {{ request.POST.director }}</p>
+        <p>Year: {{ request.POST.year }}</p>
+        <p>Rating: {{ request.POST.rating }}</p>
+        <img src="/media/{{request.FILES.poster.name}}" alt="" width="500px" height="auto"/>
+    {% endif %}
+</body>
+</html>

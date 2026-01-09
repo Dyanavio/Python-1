@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock title %}
+
+{% block content %}
+
+<h1 class="fw-bold text-dark">{{ title }}</h1>
+<hr/>
+<div class="row d-flex mb-2">
+    <a href="{% url 'create' %}" class="btn btn-dark">Add</a>
+    <a href="{% url 'search' %}" class="btn btn-dark mx-2">Search</a>
+</div>
+{% if not restaurants %}
+    <span class="fs3">Nothing's there...</span>
+{% else %}
+    {% for restaurant in restaurants %}
+    <div class="row border border-dark rounded mb-2 bg-secondary">
+        <div class="col-2 d-flex flex-col justify-content-center align-items-center">
+            <span class="fw-bold text-light">{{ restaurant.name }}</span>
+        </div>
+        <div class="col-2 d-flex flex-col justify-content-center align-items-center">
+            <span class="text-light">{{ restaurant.specialization }}</span>
+        </div>
+        <div class="col-3 d-flex flex-col justify-content-center align-items-center">
+            <span class="text-light">{{ restaurant.address }}</span>
+        </div>
+        <div class="col-2 d-flex flex-col justify-content-center align-items-center">
+            <a href="{{ restaurant.website }}" class="text-light">{{ restaurant.website }}</a>
+        </div>
+        <div class="col-2 d-flex flex-col justify-content-center align-items-center">
+            <span class="text-light">{{ restaurant.phone }}</span>
+        </div>
+        <div class="col-1 d-flex flex-col justify-content-center align-items-center">
+            <a href="{% url 'manage' restaurant.id %}" class="btn btn-dark">Edit</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock content %}

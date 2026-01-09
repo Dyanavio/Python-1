@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBV</title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        {% if not sent %}
+            <h1>Water Form</h1>
+            <form action="/water/" method="post">
+                {% csrf_token %}
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" name="name" required/><br/><br/>
+
+                    <label for="surname">Surname: </label>
+                    <input type="text" id="surname" name="surname" required/><br/><br/>
+
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" name="email" required/><br/><br/>
+
+                    <label for="phone">Phone number: </label>
+                    <input type="tel" id="phone" name="phone" required/><br/><br/>
+
+                    <label for="address">Address: </label>
+                    <input id="address" type="text" name="address" required/><br/><br/>
+
+                    <label for="months">Months:</label>
+                    <select id="months" name="months">
+                        <option value="1">1 month</option>
+                        <option value="3">3 months</option>
+                        <option value="6">6 months</option>
+                        <option value="12">12 months</option>
+                    </select>
+
+                    <label for="volume">Months:</label>
+                    <select id="volume" name="volume">
+                        <option value="5">5 l</option>
+                        <option value="10">10 l</option>
+                        <option value="15">15</option>
+                    </select>
+                    
+                    <input type="submit" value="Send">
+            </form>
+        {% else %}
+        <div class="card bg-light w-25 mt-3">
+            <div class="card-header">
+                <span class="fw-bold text-dark">Order for {{ name }} {{ surname }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <span class="text-dark">Email: {{ request.POST.email }}</span>
+                </div>
+                <div class="row">
+                    <span class="text-dark">Phone: {{ request.POST.phone }}</span>
+                </div>
+                <div class="row">
+                    <span class="text-dark">Address: {{ request.POST.address }}</span>
+                </div>
+                <div class="row">
+                    <span class="text-dark">For {{ request.POST.months }} month(s)</span>
+                </div>
+                <div class="row">
+                    <span class="text-dark">Volume {{ request.POST.volume }} l(s)</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
