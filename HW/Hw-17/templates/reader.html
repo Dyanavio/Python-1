@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}{{ reader.name }} {{ reader.surname }}{% endblock title %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="{% url 'index' %}" class="btn btn-outline-success">
+            Back to library
+        </a>
+    </div>
+
+    {% if reader %}
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                {% if reader.avatar %}
+                <img
+                    src="{% url 'index' %}media/pictures/readers/{{ reader.avatar }}"
+                    class="img-fluid rounded border border-success"
+                    alt="{{ reader.name }} {{ reader.surname }}"
+                />
+                {% else %}
+                <div
+                    class="bg-secondary rounded border border-success d-flex align-items-center justify-content-center"
+                    style="height: 500px"
+                >
+                    <img
+                        src="{% url 'index' %}media/pictures/readers/nouser.png"
+                        class="card-img-top"
+                        alt="No cover available"
+                        style="height: 500px; object-fit: cover"
+                    />
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-8">
+                <div class="card bg-light border-success">
+                    <div class="card-body">
+                        <h1 class="card-title text-success mb-4">{{ reader.name }} {{ reader.surname }}</h1>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <p class="mb-3">
+                                    <strong class="text-success">Email:</strong>
+                                    <br />
+                                    <span class="text-dark">{{ reader.email }}</span>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-3">
+                                    <strong class="text-success">Contacts:</strong>
+                                    <br />
+                                    <span class="text-secondary">{{ reader.contacts }}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <p class="mb-3">
+                                    <strong class="text-success">Registration date:</strong>
+                                    <br />
+                                    <span class="text-dark">{{ reader.registrationDate }}</span>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p class="mb-3">
+                                    <strong class="text-success">Books taken:</strong>
+                                    <br />
+                                    <ul>
+                                        {% for book in reader.booksTaken.all %}
+                                            <li class="text-dark">{{ book.name }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col d-flex justify-content-end">
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'index' %}" class="btn btn-outline-dark mx-2">
+                                    Back to Library
+                                </a>
+                                {% if perms.main.change_reader %}
+                                <a href="{% url 'updateReader' reader.id %}" class="btn btn-outline-warning mx-2">
+                                    Edit Reader
+                                </a>
+                                {% endif %}
+                                {% if perms.main.delete_reader %}
+                                <a href="{% url 'deleteReader' reader.id %}" class="btn btn-outline-danger mx-2">
+                                        Delete Reader
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Reader was not found</h4>
+                <p>No such reader was found</p>
+                <a href="{% url 'index' %}" class="btn btn-outline-danger mt-2">
+                    Return to Library
+                </a>
+            </div>
+    {% endif %}
+
+{% endblock %}

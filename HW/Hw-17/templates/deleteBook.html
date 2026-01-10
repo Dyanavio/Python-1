@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-4 text-dark">Delete Book</h1>
+        <p class="lead text-muted">Book Deletion</p>
+    </div>
+</div>
+
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Error Occured</h4>
+    <p>{{ error }}</p>
+    <a href="{% url 'index' %}" class="btn btn-danger btn-sm">Back to Library</a>
+</div>
+{% endif %}
+
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Success</h4>
+    <p>{{ message }}</p>
+    <a href="{% url 'index' %}" class="btn btn-success btn-sm">Back to Library</a>
+</div>
+{% endif %}
+
+{% if book and confirm_required %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card bg-light border-success">
+            <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">System Alert</h4>
+                    <p>You are about to delete this book. This action cannot be undone.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5 class="text-success">{{ book.name }}</h5>
+
+                    {% if book.style %}
+                    <div class="mb-3">
+                        <img src="{% url 'index' %}media/pictures/books/{{ book.style }}" alt="{{ book.name }}"
+                            style="max-width: 200px; height: auto; border: 1px solid #01490c;">
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-2">
+                        <small class="text-muted">
+                            <strong>Author:</strong>
+                            {{ book.author }}
+                        </small>
+                    </div>
+
+                    <div class="mb-2">
+                        <small class="text-warning">
+                            <strong>Year:</strong>
+                            {{ book.year }}
+                        </small>
+                    </div>
+
+                    <div class="mb-2">
+                        <small class="text-muted">
+                            <strong>Publisher:</strong>
+                            {{ book.publisher }}
+                        </small>
+                    </div>
+                </div>
+
+                <form method="POST" class="d-flex gap-2">
+                    {% csrf_token %}
+                    <button type="submit" name="confirm" value="yes" class="btn btn-danger">
+                        Delete Book
+                    </button>
+                    <a href="{% url 'book' book.id %}" class="btn btn-dark mx-2">
+                        Cancel
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}
